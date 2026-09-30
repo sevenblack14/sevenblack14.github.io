@@ -1,390 +1,503 @@
-index.html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEVENBLACK - Beats & Instrumentals</title>
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
-  }
-
-  body {
-    background-color: #0d0d0d;
-    color: #fff;
-  }
-
-  header {
-    background: linear-gradient(90deg, #b30000, #003366);
-    padding: 25px 20px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  }
-
-  header h1 {
-    font-size: 2.5rem;
-    letter-spacing: 3px;
-    color: #fff;
-    text-shadow: 2px 2px 5px #000;
-  }
-
-  header p {
-    margin-top: 8px;
-    color: #ddd;
-    font-size: 1rem;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 15px;
-  }
-
-  .controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 25px;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .search-bar {
-    flex: 1;
-    min-width: 200px;
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    background: #1a1a1a;
-    color: #fff;
-    border: 1px solid #333;
-  }
-
-  select {
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: 1px solid #333;
-    background: #1a1a1a;
-    color: #fff;
-    font-size: 1rem;
-    outline: none;
-  }
-
-  .beat-card {
-    background: #151515;
-    border: 1px solid #262626;
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    transition: 0.3s;
-  }
-
-  .beat-card:hover {
-    border-color: #b30000;
-    box-shadow: 0 0 15px rgba(179,0,0,0.3);
-  }
-
-  .beat-info h3 {
-    color: #fff;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-  }
-
-  .beat-info span {
-    background: #003366;
-    color: #fff;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    margin-right: 8px;
-  }
-
-  .beat-info .bpm {
-    background: #b30000;
-  }
-
-  .beat-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .btn-play {
-    background: #b30000;
-    color: #fff;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: 0.3s;
-  }
-
-  .btn-play:hover {
-    background: #800000;
-  }
-
-  .btn-contact {
-    background: #003366;
-    color: #fff;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: 0.3s;
-  }
-
-  .btn-contact:hover {
-    background: #002244;
-  }
-
-  #player-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(90deg, #003366, #b30000);
-    padding: 12px 20px;
-    display: none;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.5);
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  #player-bar audio {
-    flex: 1;
-    min-width: 200px;
-  }
-
-  #player-title {
-    font-weight: bold;
-    color: #fff;
-  }
-
-  .no-results {
-    text-align: center;
-    color: #777;
-    margin-top: 30px;
-    font-size: 1.1rem;
-  }
-
-  footer {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-    font-size: 0.85rem;
-    margin-bottom: 80px;
-  }
-
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-  }
-
-  .modal-box {
-    background: #151515;
-    border: 1px solid #b30000;
-    border-radius: 12px;
-    padding: 25px;
-    text-align: center;
-    max-width: 320px;
-    width: 90%;
-  }
-
-  .modal-box h3 {
-    margin-bottom: 15px;
-    color: #fff;
-  }
-
-  .modal-box button {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    color: #fff;
-  }
-
-  .modal-box .ig-btn {
-    background: linear-gradient(45deg, #b30000, #003366);
-  }
-
-  .modal-box .mail-btn {
-    background: #003366;
-  }
-
-  .modal-box .close-btn {
-    background: #333;
-    margin-top: 10px;
-  }
-
-  @media (max-width: 500px) {
-    header h1 { font-size: 1.8rem; }
-    .beat-card { flex-direction: column; align-items: flex-start; }
-    .beat-actions { width: 100%; justify-content: space-between; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SEVENBLACK — beats et instrumentaux urbains par SEVN.">
+  <title>SEVENBLACK — Beats for the ones who move different</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#090b12;
+      --panel:#111621;
+      --panel-2:#171d2a;
+      --line:rgba(255,255,255,.1);
+      --muted:#9299a8;
+      --white:#f5f6f8;
+      --red:#ff334c;
+      --red-deep:#b90f31;
+      --blue:#2365ff;
+      --cyan:#55d6ff;
+      --lime:#d0ff53;
+      --radius:18px;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0; color:var(--white); background:var(--ink);
+      font-family:Arial,Segoe UI,sans-serif; overflow-x:hidden;
+    }
+    a { color:inherit; text-decoration:none; }
+    button, input, select { font:inherit; }
+    .wrap { width:min(1180px,calc(100% - 42px)); margin:auto; }
+    .display { font-family:"Bebas Neue",Impact,sans-serif; letter-spacing:.045em; }
+    .eyebrow {
+      display:flex; align-items:center; gap:10px; color:var(--cyan);
+      font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase;
+    }
+    .eyebrow::before { content:""; width:28px; height:2px; background:var(--red); box-shadow:10px 0 var(--blue); }
+    header {
+      position:relative; z-index:10; border-bottom:1px solid var(--line);
+      background:rgba(9,11,18,.72); backdrop-filter:blur(17px);
+    }
+    .nav { height:78px; display:flex; align-items:center; justify-content:space-between; }
+    .logo {
+      font-size:34px; line-height:1; color:#fff;
+      text-shadow:4px 0 var(--red), -3px 0 var(--blue); transform:skew(-5deg);
+    }
+    .nav-links { display:flex; align-items:center; gap:30px; color:#b8bfcb; font-size:13px; font-weight:700; }
+    .nav-links a:hover { color:#fff; }
+    .nav-cta {
+      border:1px solid var(--line); border-radius:999px; padding:11px 18px;
+      color:#fff; transition:.25s;
+    }
+    .nav-cta:hover { border-color:var(--red); background:rgba(255,51,76,.12); transform:translateY(-2px); }
+    .hero { position:relative; min-height:550px; display:grid; align-items:center; padding:78px 0 102px; overflow:hidden; }
+    .hero::after {
+      content:""; position:absolute; width:700px; height:700px; right:-220px; top:-190px;
+      border:1px solid rgba(35,101,255,.24); border-radius:50%;
+      box-shadow: 0 0 0 70px rgba(35,101,255,.04), 0 0 0 140px rgba(255,51,76,.025);
+    }
+    .hero-grid {
+      position:absolute; inset:0; opacity:.18;
+      background-image: linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+      background-size:68px 68px; mask-image:linear-gradient(to right,black,transparent 78%);
+    }
+    .hero-copy { position:relative; z-index:1; max-width:760px; }
+    h1 { margin:19px 0 22px; font-size:clamp(68px,12vw,154px); line-height:.82; letter-spacing:.015em; }
+    h1 span { display:block; color:var(--red); text-shadow:7px 7px 0 rgba(35,101,255,.85); }
+    .hero-text { max-width:510px; color:#aab1bf; font-size:16px; line-height:1.65; margin:0 0 33px; }
+    .hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:14px; }
+    .btn {
+      border:0; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center;
+      justify-content:center; gap:10px; padding:14px 22px; color:#fff; font-size:12px;
+      font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+      transition: transform .25s, box-shadow .25s, background .25s;
+    }
+    .btn:hover { transform:translateY(-3px); }
+    .btn-primary { background:var(--red); box-shadow:0 8px 28px rgba(255,51,76,.27); }
+    .btn-primary:hover { box-shadow:0 12px 32px rgba(255,51,76,.42); background:#ff4560; }
+    .btn-ghost { background:rgba(255,255,255,.07); border:1px solid var(--line); }
+    .btn-ghost:hover { background:rgba(35,101,255,.2); border-color:rgba(85,214,255,.45); }
+    .hero-orb {
+      position:absolute; right:15%; bottom:4%; width:130px; height:130px; border-radius:50%;
+      background:linear-gradient(135deg,var(--red),var(--blue)); filter:blur(30px); opacity:.38;
+    }
+    .catalogue { position:relative; z-index:2; padding:0 0 95px; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:30px; margin-bottom:24px; }
+    h2 { font-size:52px; line-height:.9; margin:10px 0 0; }
+    .section-note { color:var(--muted); font-size:13px; max-width:270px; line-height:1.5; text-align:right; }
+    .toolbar {
+      display:flex; align-items:center; gap:10px; margin:0 0 22px; padding:10px;
+      background:rgba(255,255,255,.045); border:1px solid var(--line); border-radius:14px;
+    }
+    .search { display:flex; align-items:center; flex:1; gap:10px; padding:0 10px; }
+    .search svg { width:18px; color:var(--muted); flex:none; }
+    .search input { width:100%; border:0; outline:0; background:transparent; color:#fff; padding:10px 0; font-size:14px; }
+    .search input::placeholder { color:#727989; }
+    select {
+      color:#dfe3eb; background:#1b2230; border:1px solid var(--line); border-radius:9px;
+      padding:10px 13px; outline:0; font-size:12px; cursor:pointer;
+    }
+    .beat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .beat-card {
+      position:relative; min-width:0; padding:10px;
+      background:linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.025));
+      border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 18px 45px rgba(0,0,0,.18);
+      transition: transform .3s, border-color .3s, box-shadow .3s; animation:rise .55s both;
+    }
+    .beat-card:hover {
+      transform:translateY(-7px); border-color:rgba(255,51,76,.62);
+      box-shadow: 0 22px 55px rgba(0,0,0,.38), 0 0 0 1px rgba(35,101,255,.16);
+    }
+    .beat-card:nth-child(2) { animation-delay:.08s; }
+    .beat-card:nth-child(3) { animation-delay:.16s; }
+    .beat-card:nth-child(4) { animation-delay:.24s; }
+    .beat-card:nth-child(5) { animation-delay:.32s; }
+    @keyframes rise { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
+    .cover { position:relative; aspect-ratio:1.48; overflow:hidden; border-radius:12px; background:#202738; }
+    .cover::before, .cover::after { content:""; position:absolute; }
+    .cover::before {
+      inset:-30%;
+      background:repeating-linear-gradient(115deg, transparent 0 23px, rgba(255,255,255,.16) 24px 27px, transparent 28px 51px);
+      transform:rotate(15deg);
+    }
+    .cover::after {
+      width:70%; height:120%; right:-15%; top:-40%; background:var(--cover-accent,#ff334c);
+      mix-blend-mode:screen; transform:rotate(28deg); opacity:.75;
+    }
+    .cover-blue { --cover-accent:#2568ff; background:linear-gradient(135deg,#17234b,#060b19 68%); }
+    .cover-red { --cover-accent:#ff234d; background:linear-gradient(135deg,#55122b,#0d101b 68%); }
+    .cover-cyan { --cover-accent:#4edfff; background:linear-gradient(135deg,#153e56,#0c101e 68%); }
+    .cover-lime { --cover-accent:#d0ff53; background:linear-gradient(135deg,#354414,#0b1119 68%); }
+    .cover-purple { --cover-accent:#af55ff; background:linear-gradient(135deg,#3a165d,#0b101d 68%); }
+    .cover-code {
+      position:absolute; z-index:1; left:14px; bottom:11px; color:rgba(255,255,255,.82);
+      font:24px/1 "Bebas Neue",Impact,sans-serif; letter-spacing:.08em;
+    }
+    .cover-index {
+      position:absolute; z-index:1; right:13px; top:11px; color:rgba(255,255,255,.55);
+      font-size:10px; font-weight:bold; letter-spacing:.14em;
+    }
+    .card-body { padding:15px 6px 4px; }
+    .card-top { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+    .beat-name { margin:0; font-size:27px; line-height:1; }
+    .tag {
+      border-radius:4px; padding:5px 8px 4px; color:#090b12; background:var(--lime);
+      font:12px/1 "Bebas Neue",Impact,sans-serif; letter-spacing:.08em; white-space:nowrap;
+    }
+    .tag-drill { background:var(--red); color:#fff; }
+    .tag-rap { background:var(--cyan); }
+    .tag-trap { background:var(--blue); color:#fff; }
+    .tag-malo { background:#be65ff; color:#fff; }
+    .waveform { display:flex; align-items:center; gap:3px; height:28px; margin:16px 0 13px; opacity:.8; }
+    .waveform i { display:block; width:3px; height:var(--h); background:linear-gradient(var(--red),var(--blue)); border-radius:4px; }
+    audio { display:block; width:100%; height:34px; filter:invert(.88) hue-rotate(175deg) saturate(1.35); opacity:.86; }
+    .card-foot {
+      display:flex; justify-content:space-between; align-items:center; margin-top:12px;
+      padding-top:12px; border-top:1px solid var(--line);
+    }
+    .contact { position:relative; }
+    .contact summary {
+      list-style:none; cursor:pointer; color:#c6ccd7; font-size:11px;
+      font-weight:800; text-transform:uppercase; letter-spacing:.06em;
+    }
+    .contact summary::-webkit-details-marker { display:none; }
+    .contact summary::after { content:" ↗"; color:var(--red); }
+    .contact-menu {
+      position:absolute; z-index:4; right:0; bottom:28px; min-width:180px; padding:7px;
+      background:#1b2230; border:1px solid var(--line); border-radius:10px; box-shadow:0 15px 30px #0008;
+    }
+    .contact-menu a { display:block; padding:10px; color:#e9edf5; font-size:12px; border-radius:6px; }
+    .contact-menu a:hover { background:rgba(255,51,76,.15); color:#fff; }
+    .meta { color:#767e8d; font-size:11px; }
+    .empty {
+      display:none; grid-column:1/-1; border:1px dashed var(--line); border-radius:16px;
+      color:var(--muted); padding:35px; text-align:center;
+    }
+    footer { border-top:1px solid var(--line); padding:27px 0 36px; color:#737b8a; font-size:12px; }
+    .footer-row { display:flex; justify-content:space-between; gap:18px; }
+    .footer-brand { color:#fff; font:24px/1 "Bebas Neue",Impact,sans-serif; }
+    .footer-links { display:flex; gap:22px; }
+    .footer-links a:hover { color:var(--red); }
+    @media (max-width:800px) {
+      .beat-grid { grid-template-columns:repeat(2,1fr); }
+      .hero { min-height:500px; }
+      .nav-links a:not(.nav-cta) { display:none; }
+    }
+    @media (max-width:560px) {
+      .wrap { width:min(100% - 28px,1180px); }
+      .nav { height:68px; }
+      .logo { font-size:29px; }
+      .hero { padding:66px 0 80px; }
+      h1 { font-size:76px; }
+      .hero-text { font-size:14px; }
+      .section-head { display:block; }
+      .section-note { text-align:left; margin-top:15px; }
+      .toolbar { display:block; padding:7px; }
+      .search { padding:0 9px; border-bottom:1px solid var(--line); margin-bottom:7px; }
+      .toolbar select { width:100%; margin-top:7px; }
+      .beat-grid { grid-template-columns:1fr; }
+      .footer-row { display:block; }
+      .footer-links { margin-top:18px; }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <nav class="nav wrap" aria-label="Navigation principale">
+      <a class="logo display" href="#top" aria-label="SEVENBLACK accueil">SEVENBLACK</a>
+      <div class="nav-links">
+        <a href="#beats">Les beats</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="mailto:sevenblackbeat@gmail.com">
+          Travailler ensemble <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </nav>
+  </header>
 
-<header>
-  <h1>SEVENBLACK</h1>
-  <p>Beatmaker • Loopmaker — Instrumentals FR</p>
-</header>
-
-<div class="container">
-
-  <div class="controls">
-    <input type="text" class="search-bar" id="searchInput" placeholder="🔍 Rechercher un beat...">
-    <select id="genreFilter">
-      <option value="all">Tous les genres</option>
-      <option value="Trap">Trap</option>
-      <option value="Afro">Afro</option>
-      <option value="Malotrap">Malotrap</option>
-      <option value="Drill">Drill</option>
-      <option value="Rap Mélo">Rap Mélo</option>
-    </select>
-    <select id="sortFilter">
-      <option value="name">Trier par nom</option>
-      <option value="bpm">Trier par BPM</option>
-    </select>
-  </div>
-
-  <div id="beatList"></div>
-  <div class="no-results" id="noResults" style="display:none;">Aucun beat trouvé 😕</div>
-
-</div>
-
-<div id="player-bar">
-  <span id="player-title">🎵 Aucun beat sélectionné</span>
-  <audio id="audioPlayer" controls></audio>
-</div>
-
-<div class="modal-overlay" id="contactModal">
-  <div class="modal-box">
-    <h3>Contacter SEVENBLACK</h3>
-    <button class="ig-btn" onclick="window.open('https://instagram.com/_sevn.prod','_blank')">📸 Instagram : _sevn.prod</button>
-    <button class="mail-btn" onclick="window.location.href='mailto:sevenblackbeat@gmail.com'">✉️ Email</button>
-    <button class="close-btn" onclick="closeModal()">Fermer</button>
-  </div>
-</div>
-
-<footer>
-  © 2026 SEVENBLACK — Tous droits réservés
-</footer>
-
-<script>
-  const beats = [
-    { name: "Plume Afro", genre: "Afro", bpm: 102, file: "" },
-    { name: "Drill FR97", genre: "Drill", bpm: 140, file: "" },
-    { name: "Coca Rap FR", genre: "Rap Mélo", bpm: 90, file: "" },
-    { name: "Rnkor", genre: "Malotrap", bpm: 130, file: "" }
-  ];
-
-  const beatList = document.getElementById('beatList');
-  const searchInput = document.getElementById('searchInput');
-  const genreFilter = document.getElementById('genreFilter');
-  const sortFilter = document.getElementById('sortFilter');
-  const noResults = document.getElementById('noResults');
-  const audioPlayer = document.getElementById('audioPlayer');
-  const playerBar = document.getElementById('player-bar');
-  const playerTitle = document.getElementById('player-title');
-  const contactModal = document.getElementById('contactModal');
-
-  function renderBeats() {
-    let filtered = [...beats];
-
-    const search = searchInput.value.toLowerCase();
-    const genre = genreFilter.value;
-    const sort = sortFilter.value;
-
-    filtered = filtered.filter(b => b.name.toLowerCase().includes(search));
-
-    if (genre !== "all") {
-      filtered = filtered.filter(b => b.genre === genre);
-    }
-
-    if (sort === "name") {
-      filtered.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sort === "bpm") {
-      filtered.sort((a, b) => a.bpm - b.bpm);
-    }
-
-    beatList.innerHTML = "";
-
-    if (filtered.length === 0) {
-      noResults.style.display = "block";
-      return;
-    } else {
-      noResults.style.display = "none";
-    }
-
-    filtered.forEach(beat => {
-      const card = document.createElement('div');
-      card.className = 'beat-card';
-      card.innerHTML = `
-        <div class="beat-info">
-          <h3>${beat.name}</h3>
-          <span>${beat.genre}</span>
-          <span class="bpm">${beat.bpm} BPM</span>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-orb" aria-hidden="true"></div>
+      <div class="wrap hero-copy">
+        <div class="eyebrow">Beatmaker · Loopmaker · Paris</div>
+        <h1 class="display">
+          Fais du bruit.
+          <span>Pas du déjà-vu.</span>
+        </h1>
+        <p class="hero-text">
+          Des prods brutes, mélodiques et calibrées pour celles et ceux qui ont quelque chose à dire.
+          Choisis ta vibe, appuie sur play, écris la suite.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#beats">
+            Explorer les beats <span aria-hidden="true">↓</span>
+          </a>
+          <a class="btn btn-ghost" href="https://instagram.com/_sevn.prod" target="_blank" rel="noopener">
+            Instagram <span aria-hidden="true">↗</span>
+          </a>
         </div>
-        <div class="beat-actions">
-          <button class="btn-play" onclick="playBeat('${beat.name}', '${beat.file}')">▶️ Écouter</button>
-          <button class="btn-contact" onclick="openModal()">📩 Contact</button>
+      </div>
+    </section>
+
+    <section class="catalogue wrap" id="beats" aria-labelledby="beats-title">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Le catalogue</div>
+          <h2 id="beats-title" class="display">
+            Trouve ta <span style="color:var(--red)">fréquence.</span>
+          </h2>
         </div>
-      `;
-      beatList.appendChild(card);
-    });
-  }
+        <p class="section-note">
+          Écoute les démos. Repère ton mood. Puis on construit le morceau.
+        </p>
+      </div>
 
-  function playBeat(name, file) {
-    playerTitle.textContent = "🎵 " + name;
-    audioPlayer.src = file;
-    playerBar.style.display = "flex";
-    audioPlayer.play().catch(() => {
-      console.log("Aucun fichier audio disponible pour l'instant.");
-    });
-  }
+      <div class="toolbar" role="search">
+        <label class="search" for="beat-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m20 20-4-4"></path>
+          </svg>
+          <input id="beat-search" type="search" placeholder="Rechercher un beat..." autocomplete="off">
+        </label>
+        <label class="sr-only" for="beat-sort">Trier les beats</label>
+        <select id="beat-sort">
+          <option value="default">Trier : nouveautés</option>
+          <option value="name">Nom, A → Z</option>
+          <option value="genre">Genre</option>
+        </select>
+      </div>
 
-  function openModal() {
-    contactModal.style.display = "flex";
-  }
+      <div class="beat-grid" id="beat-grid">
+        <article class="beat-card" data-name="Plume Afro" data-genre="Afro">
+          <div class="cover cover-blue">
+            <span class="cover-index">SB / 001</span>
+            <span class="cover-code">PLUME / AFRO</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3 class="beat-name display">Plume Afro</h3>
+              <span class="tag">Afro</span>
+            </div>
+            <div class="waveform" aria-hidden="true">
+              <i style="--h:10px"></i><i style="--h:21px"></i><i style="--h:16px"></i><i style="--h:26px"></i>
+              <i style="--h:13px"></i><i style="--h:23px"></i><i style="--h:9px"></i><i style="--h:19px"></i>
+              <i style="--h:27px"></i><i style="--h:14px"></i><i style="--h:22px"></i><i style="--h:10px"></i>
+              <i style="--h:18px"></i><i style="--h:26px"></i><i style="--h:12px"></i><i style="--h:20px"></i>
+              <i style="--h:9px"></i><i style="--h:15px"></i><i style="--h:25px"></i><i style="--h:12px"></i>
+            </div>
+            <audio controls preload="none">
+              <source src="audio/plume-afro.mp3" type="audio/mpeg">
+              Votre navigateur ne supporte pas l'audio.
+            </audio>
+            <div class="card-foot">
+              <span class="meta">02:31 · 2026</span>
+              <details class="contact">
+                <summary>Contacter</summary>
+                <div class="contact-menu">
+                  <a href="https://instagram.com/_sevn.prod" target="_blank" rel="noopener">Instagram ↗</a>
+                  <a href="mailto:sevenblackbeat@gmail.com">Email →</a>
+                </div>
+              </details>
+            </div>
+          </div>
+        </article>
 
-  function closeModal() {
-    contactModal.style.display = "none";
-  }
+        <article class="beat-card" data-name="Drill FR97" data-genre="Drill">
+          <div class="cover cover-red">
+            <span class="cover-index">SB / 002</span>
+            <span class="cover-code">DRILL / FR97</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3 class="beat-name display">Drill FR97</h3>
+              <span class="tag tag-drill">Drill</span>
+            </div>
+            <div class="waveform" aria-hidden="true">
+              <i style="--h:22px"></i><i style="--h:11px"></i><i style="--h:27px"></i><i style="--h:17px"></i>
+              <i style="--h:9px"></i><i style="--h:24px"></i><i style="--h:14px"></i><i style="--h:26px"></i>
+              <i style="--h:12px"></i><i style="--h:21px"></i><i style="--h:8px"></i><i style="--h:25px"></i>
+              <i style="--h:15px"></i><i style="--h:20px"></i><i style="--h:10px"></i><i style="--h:26px"></i>
+              <i style="--h:13px"></i><i style="--h:23px"></i><i style="--h:9px"></i><i style="--h:18px"></i>
+            </div>
+            <audio controls preload="none">
+              <source src="audio/drill-fr97.mp3" type="audio/mpeg">
+              Votre navigateur ne supporte pas l'audio.
+            </audio>
+            <div class="card-foot">
+              <span class="meta">02:18 · 2026</span>
+              <details class="contact">
+                <summary>Contacter</summary>
+                <div class="contact-menu">
+                  <a href="https://instagram.com/_sevn.prod" target="_blank" rel="noopener">Instagram ↗</a>
+                  <a href="mailto:sevenblackbeat@gmail.com">Email →</a>
+                </div>
+              </details>
+            </div>
+          </div>
+        </article>
 
-  searchInput.addEventListener('input', renderBeats);
-  genreFilter.addEventListener('change', renderBeats);
-  sortFilter.addEventListener('change', renderBeats);
+        <article class="beat-card" data-name="Coca Rap FR" data-genre="Rap Mélo">
+          <div class="cover cover-cyan">
+            <span class="cover-index">SB / 003</span>
+            <span class="cover-code">COCA / RAP FR</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3 class="beat-name display">Coca Rap FR</h3>
+              <span class="tag tag-rap">Rap Mélo</span>
+            </div>
+            <div class="waveform" aria-hidden="true">
+              <i style="--h:15px"></i><i style="--h:24px"></i><i style="--h:11px"></i><i style="--h:20px"></i>
+              <i style="--h:28px"></i><i style="--h:14px"></i><i style="--h:23px"></i><i style="--h:9px"></i>
+              <i style="--h:19px"></i><i style="--h:26px"></i><i style="--h:12px"></i><i style="--h:22px"></i>
+              <i style="--h:8px"></i><i style="--h:27px"></i><i style="--h:14px"></i><i style="--h:20px"></i>
+              <i style="--h:10px"></i><i style="--h:24px"></i><i style="--h:16px"></i><i style="--h:26px"></i>
+            </div>
+            <audio controls preload="none">
+              <source src="audio/coca-rap-fr.mp3" type="audio/mpeg">
+              Votre navigateur ne supporte pas l'audio.
+            </audio>
+            <div class="card-foot">
+              <span class="meta">02:47 · 2026</span>
+              <details class="contact">
+                <summary>Contacter</summary>
+                <div class="contact-menu">
+                  <a href="https://instagram.com/_sevn.prod" target="_blank" rel="noopener">Instagram ↗</a>
+                  <a href="mailto:sevenblackbeat@gmail.com">Email →</a>
+                </div>
+              </details>
+            </div>
+          </div>
+        </article>
 
-  renderBeats();
-</script>
+        <article class="beat-card" data-name="Rnkor" data-genre="Trap">
+          <div class="cover cover-lime">
+            <span class="cover-index">SB / 004</span>
+            <span class="cover-code">RNK / 808</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3 class="beat-name display">Rnkor</h3>
+              <span class="tag tag-trap">Trap</span>
+            </div>
+            <div class="waveform" aria-hidden="true">
+              <i style="--h:26px"></i><i style="--h:13px"></i><i style="--h:20px"></i><i style="--h:8px"></i>
+              <i style="--h:23px"></i><i style="--h:17px"></i><i style="--h:28px"></i><i style="--h:10px"></i>
+              <i style="--h:21px"></i><i style="--h:14px"></i><i style="--h:25px"></i><i style="--h:9px"></i>
+              <i style="--h:18px"></i><i style="--h:27px"></i><i style="--h:12px"></i><i style="--h:22px"></i>
+              <i style="--h:15px"></i><i style="--h:26px"></i><i style="--h:11px"></i><i style="--h:19px"></i>
+            </div>
+            <audio controls preload="none">
+              <source src="audio/rnkor.mp3" type="audio/mpeg">
+              Votre navigateur ne supporte pas l'audio.
+            </audio>
+            <div class="card-foot">
+              <span class="meta">02:09 · 2026</span>
+              <details class="contact">
+                <summary>Contacter</summary>
+                <div class="contact-menu">
+                  <a href="https://instagram.com/_sevn.prod" target="_blank" rel="noopener">Instagram ↗</a>
+                  <a href="mailto:sevenblackbeat@gmail.com">Email →</a>
+                </div>
+              </details>
+            </div>
+          </div>
+        </article>
 
+        <article class="beat-card" data-name="Malotrap" data-genre="Malotrap">
+          <div class="cover cover-purple">
+            <span class="cover-index">SB / 005</span>
+            <span class="cover-code">MALO / TRAP</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3 class="beat-name display">Malotrap</h3>
+              <span class="tag tag-malo">Malotrap</span>
+            </div>
+            <div class="waveform" aria-hidden="true">
+              <i style="--h:12px"></i><i style="--h:25px"></i><i style="--h:17px"></i><i style="--h:9px"></i>
+              <i style="--h:22px"></i><i style="--h:28px"></i><i style="--h:14px"></i><i style="--h:24px"></i>
+              <i style="--h:10px"></i><i style="--h:20px"></i><i style="--h:27px"></i><i style="--h:13px"></i>
+              <i style="--h:23px"></i><i style="--h:8px"></i><i style="--h:18px"></i><i style="--h:26px"></i>
+              <i style="--h:15px"></i><i style="--h:21px"></i><i style="--h:11px"></i><i style="--h:25px"></i>
+            </div>
+            <audio controls preload="none">
+              <source src="audio/malotrap.mp3" type="audio/mpeg">
+              Votre navigateur ne supporte pas l'audio.
+            </audio>
+            <div class="card-foot">
+              <span class="meta">02:36 · 2026</span>
+              <details class="contact">
+                <summary>Contacter</summary>
+                <div class="contact-menu">
+                  <a href="https://instagram.com/_sevn.prod" target="_blank" rel="noopener">Instagram ↗</a>
+                  <a href="mailto:sevenblackbeat@gmail.com">Email →</a>
+                </div>
+              </details>
+            </div>
+          </div>
+        </article>
+
+        <div class="empty" id="empty-state">
+          Aucun beat ne correspond à ta recherche.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="wrap footer-row">
+      <div>
+        <div class="footer-brand">SEVENBLACK</div>
+        <div style="margin-top:7px">Beats for the ones who move different.</div>
+      </div>
+      <div class="footer-links">
+        <a href="https://instagram.com/_sevn.prod" target="_blank" rel="noopener">Instagram ↗</a>
+        <a href="mailto:sevenblackbeat@gmail.com">sevenblackbeat@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const grid = document.getElementById('beat-grid');
+      const search = document.getElementById('beat-search');
+      const sort = document.getElementById('beat-sort');
+      const empty = document.getElementById('empty-state');
+      const cards = Array.from(grid.querySelectorAll('.beat-card'));
+
+      function render() {
+        const query = search.value.trim().toLocaleLowerCase('fr');
+        const ordered = cards.slice().sort((a, b) => {
+          if (sort.value === 'name') {
+            return a.dataset.name.localeCompare(b.dataset.name, 'fr');
+          }
+          if (sort.value === 'genre') {
+            return a.dataset.genre.localeCompare(b.dataset.genre, 'fr');
+          }
+          return cards.indexOf(a) - cards.indexOf(b);
+        });
+        ordered.forEach(card => grid.insertBefore(card, empty));
+
+        let visible = 0;
+        cards.forEach(card => {
+          const match = card.dataset.name.toLocaleLowerCase('fr').includes(query);
+          card.hidden = !match;
+          if (match) visible += 1;
+        });
+        empty.style.display = visible ? 'none' : 'block';
+      }
+
+      search.addEventListener('input', render);
+      sort.addEventListener('change', render);
+      render();
+    }());
+  </script>
 </body>
 </html>
