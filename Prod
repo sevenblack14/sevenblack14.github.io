@@ -1,0 +1,291 @@
+index.html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KZ Beats - Instrumentales & Loops</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0d0d0d;
+    color: #fff;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #1a0033, #000);
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 3px solid #a020f0;
+  }
+
+  header h1 {
+    font-size: 3em;
+    color: #a020f0;
+    text-shadow: 0 0 20px #a020f0;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.3em;
+    margin-top: 15px;
+    color: #ccc;
+  }
+
+  nav {
+    margin-top: 30px;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #a020f0;
+    border-radius: 30px;
+    transition: 0.3s;
+  }
+
+  nav a:hover {
+    background: #a020f0;
+    box-shadow: 0 0 15px #a020f0;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 40px;
+    color: #a020f0;
+  }
+
+  /* GRID BEATS */
+  .beats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+
+  .beat-card {
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid #333;
+    transition: 0.3s;
+  }
+
+  .beat-card:hover {
+    transform: translateY(-8px);
+    border-color: #a020f0;
+    box-shadow: 0 10px 30px rgba(160, 32, 240, 0.3);
+  }
+
+  .beat-card .icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+  }
+
+  .beat-card h3 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+  }
+
+  .beat-card p {
+    color: #999;
+    margin-bottom: 15px;
+  }
+
+  .price {
+    font-size: 1.5em;
+    color: #a020f0;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #a020f0;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .btn:hover {
+    background: #7d1abd;
+    box-shadow: 0 0 20px #a020f0;
+  }
+
+  /* ABOUT */
+  .about-box {
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #333;
+  }
+
+  .about-box p {
+    font-size: 1.1em;
+    color: #ccc;
+  }
+
+  /* CONTACT */
+  .contact-box {
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #333;
+  }
+
+  .socials {
+    margin-top: 25px;
+  }
+
+  .socials a {
+    display: inline-block;
+    margin: 10px;
+    color: #fff;
+    background: #333;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .socials a:hover {
+    background: #a020f0;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 30px;
+    background: #000;
+    color: #666;
+    border-top: 1px solid #333;
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 2em; }
+    nav a { display: block; margin: 10px auto; width: fit-content; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎧 KZ BEATS</h1>
+  <p>Beatmaker & Loopmaker — Instrumentales originales</p>
+  <nav>
+    <a href="#beats">Beats</a>
+    <a href="#about">À propos</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="beats">
+  <h2>🔥 Mes Instrumentales</h2>
+  <div class="beats-grid">
+
+    <div class="beat-card">
+      <div class="icon">🌙</div>
+      <h3>Midnight Flow</h3>
+      <p>Trap / 140 BPM</p>
+      <div class="price">15€</div>
+      <a href="#contact" class="btn">Acheter</a>
+    </div>
+
+    <div class="beat-card">
+      <div class="icon">⚡</div>
+      <h3>Storm Wave</h3>
+      <p>Drill / 150 BPM</p>
+      <div class="price">20€</div>
+      <a href="#contact" class="btn">Acheter</a>
+    </div>
+
+    <div class="beat-card">
+      <div class="icon">🌆</div>
+      <h3>City Lights</h3>
+      <p>RnB / 90 BPM</p>
+      <div class="price">18€</div>
+      <a href="#contact" class="btn">Acheter</a>
+    </div>
+
+    <div class="beat-card">
+      <div class="icon">🔥</div>
+      <h3>Fire Loop</h3>
+      <p>Afrobeat / 105 BPM</p>
+      <div class="price">12€</div>
+      <a href="#contact" class="btn">Acheter</a>
+    </div>
+
+    <div class="beat-card">
+      <div class="icon">💎</div>
+      <h3>Diamond Dreams</h3>
+      <p>Boom Bap / 88 BPM</p>
+      <div class="price">15€</div>
+      <a href="#contact" class="btn">Acheter</a>
+    </div>
+
+    <div class="beat-card">
+      <div class="icon">🌊</div>
+      <h3>Ocean Drift</h3>
+      <p>Lo-fi / 75 BPM</p>
+      <div class="price">10€</div>
+      <a href="#contact" class="btn">Acheter</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="about">
+  <h2>👤 À propos</h2>
+  <div class="about-box">
+    <p>
+      Passionné par la production musicale depuis plusieurs années, 
+      je crée des instrumentales et loops originaux pour tous les artistes 
+      qui cherchent un son unique. Chaque beat est composé avec soin pour 
+      donner vie à tes projets musicaux.
+    </p>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>📩 Contact</h2>
+  <div class="contact-box">
+    <p>Intéressé par un beat ou une commande personnalisée ?</p>
+    <p>Contacte-moi directement :</p>
+    <div class="socials">
+      <a href="mailto:tonemail@example.com">✉️ Email</a>
+      <a href="https://instagram.com/tonpseudo" target="_blank">📸 Instagram</a>
+      <a href="https://wa.me/33600000000" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 KZ Beats — Tous droits réservés</p>
+</footer>
+
+</body>
+</html>
