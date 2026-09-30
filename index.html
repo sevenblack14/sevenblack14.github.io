@@ -4,288 +4,387 @@ index.html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KZ Beats - Instrumentales & Loops</title>
+<title>SEVENBLACK - Beats & Instrumentals</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  body {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #0d0d0d;
-    color: #fff;
-    line-height: 1.6;
   }
 
-  /* HEADER */
+  body {
+    background-color: #0d0d0d;
+    color: #fff;
+  }
+
   header {
-    background: linear-gradient(135deg, #1a0033, #000);
-    padding: 80px 20px;
+    background: linear-gradient(90deg, #b30000, #003366);
+    padding: 25px 20px;
     text-align: center;
-    border-bottom: 3px solid #a020f0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
   }
 
   header h1 {
-    font-size: 3em;
-    color: #a020f0;
-    text-shadow: 0 0 20px #a020f0;
-    letter-spacing: 2px;
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+    color: #fff;
+    text-shadow: 2px 2px 5px #000;
   }
 
   header p {
-    font-size: 1.3em;
-    margin-top: 15px;
-    color: #ccc;
+    margin-top: 8px;
+    color: #ddd;
+    font-size: 1rem;
   }
 
-  nav {
-    margin-top: 30px;
+  .container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 15px;
   }
 
-  nav a {
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .search-bar {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: #1a1a1a;
     color: #fff;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-    padding: 10px 20px;
-    border: 2px solid #a020f0;
-    border-radius: 30px;
-    transition: 0.3s;
+    border: 1px solid #333;
   }
 
-  nav a:hover {
-    background: #a020f0;
-    box-shadow: 0 0 15px #a020f0;
-  }
-
-  /* SECTIONS */
-  section {
-    padding: 60px 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  h2 {
-    text-align: center;
-    font-size: 2.2em;
-    margin-bottom: 40px;
-    color: #a020f0;
-  }
-
-  /* GRID BEATS */
-  .beats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+  select {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
   }
 
   .beat-card {
-    background: #1a1a1a;
-    border-radius: 15px;
-    padding: 25px;
-    text-align: center;
-    border: 1px solid #333;
+    background: #151515;
+    border: 1px solid #262626;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
     transition: 0.3s;
   }
 
   .beat-card:hover {
-    transform: translateY(-8px);
-    border-color: #a020f0;
-    box-shadow: 0 10px 30px rgba(160, 32, 240, 0.3);
+    border-color: #b30000;
+    box-shadow: 0 0 15px rgba(179,0,0,0.3);
   }
 
-  .beat-card .icon {
-    font-size: 3em;
-    margin-bottom: 15px;
-  }
-
-  .beat-card h3 {
+  .beat-info h3 {
     color: #fff;
-    margin-bottom: 10px;
-    font-size: 1.3em;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
   }
 
-  .beat-card p {
-    color: #999;
-    margin-bottom: 15px;
-  }
-
-  .price {
-    font-size: 1.5em;
-    color: #a020f0;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-
-  .btn {
-    display: inline-block;
-    background: #a020f0;
+  .beat-info span {
+    background: #003366;
     color: #fff;
-    padding: 12px 30px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-right: 8px;
+  }
+
+  .beat-info .bpm {
+    background: #b30000;
+  }
+
+  .beat-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .btn-play {
+    background: #b30000;
+    color: #fff;
     border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1em;
-  }
-
-  .btn:hover {
-    background: #7d1abd;
-    box-shadow: 0 0 20px #a020f0;
-  }
-
-  /* ABOUT */
-  .about-box {
-    background: #1a1a1a;
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid #333;
-  }
-
-  .about-box p {
-    font-size: 1.1em;
-    color: #ccc;
-  }
-
-  /* CONTACT */
-  .contact-box {
-    background: #1a1a1a;
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid #333;
-  }
-
-  .socials {
-    margin-top: 25px;
-  }
-
-  .socials a {
-    display: inline-block;
-    margin: 10px;
-    color: #fff;
-    background: #333;
-    padding: 12px 25px;
-    border-radius: 30px;
-    text-decoration: none;
+    font-size: 1rem;
     transition: 0.3s;
   }
 
-  .socials a:hover {
-    background: #a020f0;
+  .btn-play:hover {
+    background: #800000;
   }
 
-  /* FOOTER */
+  .btn-contact {
+    background: #003366;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+
+  .btn-contact:hover {
+    background: #002244;
+  }
+
+  #player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #003366, #b30000);
+    padding: 12px 20px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.5);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  #player-bar audio {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  #player-title {
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .no-results {
+    text-align: center;
+    color: #777;
+    margin-top: 30px;
+    font-size: 1.1rem;
+  }
+
   footer {
     text-align: center;
-    padding: 30px;
-    background: #000;
+    padding: 20px;
     color: #666;
-    border-top: 1px solid #333;
+    font-size: 0.85rem;
+    margin-bottom: 80px;
   }
 
-  @media (max-width: 600px) {
-    header h1 { font-size: 2em; }
-    nav a { display: block; margin: 10px auto; width: fit-content; }
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+
+  .modal-box {
+    background: #151515;
+    border: 1px solid #b30000;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
+  }
+
+  .modal-box h3 {
+    margin-bottom: 15px;
+    color: #fff;
+  }
+
+  .modal-box button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .modal-box .ig-btn {
+    background: linear-gradient(45deg, #b30000, #003366);
+  }
+
+  .modal-box .mail-btn {
+    background: #003366;
+  }
+
+  .modal-box .close-btn {
+    background: #333;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 500px) {
+    header h1 { font-size: 1.8rem; }
+    .beat-card { flex-direction: column; align-items: flex-start; }
+    .beat-actions { width: 100%; justify-content: space-between; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🎧 KZ BEATS</h1>
-  <p>Beatmaker & Loopmaker — Instrumentales originales</p>
-  <nav>
-    <a href="#beats">Beats</a>
-    <a href="#about">À propos</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <h1>SEVENBLACK</h1>
+  <p>Beatmaker • Loopmaker — Instrumentals FR</p>
 </header>
 
-<section id="beats">
-  <h2>🔥 Mes Instrumentales</h2>
-  <div class="beats-grid">
+<div class="container">
 
-    <div class="beat-card">
-      <div class="icon">🌙</div>
-      <h3>Midnight Flow</h3>
-      <p>Trap / 140 BPM</p>
-      <div class="price">15€</div>
-      <a href="#contact" class="btn">Acheter</a>
-    </div>
-
-    <div class="beat-card">
-      <div class="icon">⚡</div>
-      <h3>Storm Wave</h3>
-      <p>Drill / 150 BPM</p>
-      <div class="price">20€</div>
-      <a href="#contact" class="btn">Acheter</a>
-    </div>
-
-    <div class="beat-card">
-      <div class="icon">🌆</div>
-      <h3>City Lights</h3>
-      <p>RnB / 90 BPM</p>
-      <div class="price">18€</div>
-      <a href="#contact" class="btn">Acheter</a>
-    </div>
-
-    <div class="beat-card">
-      <div class="icon">🔥</div>
-      <h3>Fire Loop</h3>
-      <p>Afrobeat / 105 BPM</p>
-      <div class="price">12€</div>
-      <a href="#contact" class="btn">Acheter</a>
-    </div>
-
-    <div class="beat-card">
-      <div class="icon">💎</div>
-      <h3>Diamond Dreams</h3>
-      <p>Boom Bap / 88 BPM</p>
-      <div class="price">15€</div>
-      <a href="#contact" class="btn">Acheter</a>
-    </div>
-
-    <div class="beat-card">
-      <div class="icon">🌊</div>
-      <h3>Ocean Drift</h3>
-      <p>Lo-fi / 75 BPM</p>
-      <div class="price">10€</div>
-      <a href="#contact" class="btn">Acheter</a>
-    </div>
-
+  <div class="controls">
+    <input type="text" class="search-bar" id="searchInput" placeholder="🔍 Rechercher un beat...">
+    <select id="genreFilter">
+      <option value="all">Tous les genres</option>
+      <option value="Trap">Trap</option>
+      <option value="Afro">Afro</option>
+      <option value="Malotrap">Malotrap</option>
+      <option value="Drill">Drill</option>
+      <option value="Rap Mélo">Rap Mélo</option>
+    </select>
+    <select id="sortFilter">
+      <option value="name">Trier par nom</option>
+      <option value="bpm">Trier par BPM</option>
+    </select>
   </div>
-</section>
 
-<section id="about">
-  <h2>👤 À propos</h2>
-  <div class="about-box">
-    <p>
-      Passionné par la production musicale depuis plusieurs années, 
-      je crée des instrumentales et loops originaux pour tous les artistes 
-      qui cherchent un son unique. Chaque beat est composé avec soin pour 
-      donner vie à tes projets musicaux.
-    </p>
-  </div>
-</section>
+  <div id="beatList"></div>
+  <div class="no-results" id="noResults" style="display:none;">Aucun beat trouvé 😕</div>
 
-<section id="contact">
-  <h2>📩 Contact</h2>
-  <div class="contact-box">
-    <p>Intéressé par un beat ou une commande personnalisée ?</p>
-    <p>Contacte-moi directement :</p>
-    <div class="socials">
-      <a href="mailto:tonemail@example.com">✉️ Email</a>
-      <a href="https://instagram.com/tonpseudo" target="_blank">📸 Instagram</a>
-      <a href="https://wa.me/33600000000" target="_blank">💬 WhatsApp</a>
-    </div>
+</div>
+
+<div id="player-bar">
+  <span id="player-title">🎵 Aucun beat sélectionné</span>
+  <audio id="audioPlayer" controls></audio>
+</div>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <h3>Contacter SEVENBLACK</h3>
+    <button class="ig-btn" onclick="window.open('https://instagram.com/_sevn.prod','_blank')">📸 Instagram : _sevn.prod</button>
+    <button class="mail-btn" onclick="window.location.href='mailto:sevenblackbeat@gmail.com'">✉️ Email</button>
+    <button class="close-btn" onclick="closeModal()">Fermer</button>
   </div>
-</section>
+</div>
 
 <footer>
-  <p>© 2026 KZ Beats — Tous droits réservés</p>
+  © 2026 SEVENBLACK — Tous droits réservés
 </footer>
+
+<script>
+  const beats = [
+    { name: "Plume Afro", genre: "Afro", bpm: 102, file: "" },
+    { name: "Drill FR97", genre: "Drill", bpm: 140, file: "" },
+    { name: "Coca Rap FR", genre: "Rap Mélo", bpm: 90, file: "" },
+    { name: "Rnkor", genre: "Malotrap", bpm: 130, file: "" }
+  ];
+
+  const beatList = document.getElementById('beatList');
+  const searchInput = document.getElementById('searchInput');
+  const genreFilter = document.getElementById('genreFilter');
+  const sortFilter = document.getElementById('sortFilter');
+  const noResults = document.getElementById('noResults');
+  const audioPlayer = document.getElementById('audioPlayer');
+  const playerBar = document.getElementById('player-bar');
+  const playerTitle = document.getElementById('player-title');
+  const contactModal = document.getElementById('contactModal');
+
+  function renderBeats() {
+    let filtered = [...beats];
+
+    const search = searchInput.value.toLowerCase();
+    const genre = genreFilter.value;
+    const sort = sortFilter.value;
+
+    filtered = filtered.filter(b => b.name.toLowerCase().includes(search));
+
+    if (genre !== "all") {
+      filtered = filtered.filter(b => b.genre === genre);
+    }
+
+    if (sort === "name") {
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === "bpm") {
+      filtered.sort((a, b) => a.bpm - b.bpm);
+    }
+
+    beatList.innerHTML = "";
+
+    if (filtered.length === 0) {
+      noResults.style.display = "block";
+      return;
+    } else {
+      noResults.style.display = "none";
+    }
+
+    filtered.forEach(beat => {
+      const card = document.createElement('div');
+      card.className = 'beat-card';
+      card.innerHTML = `
+        <div class="beat-info">
+          <h3>${beat.name}</h3>
+          <span>${beat.genre}</span>
+          <span class="bpm">${beat.bpm} BPM</span>
+        </div>
+        <div class="beat-actions">
+          <button class="btn-play" onclick="playBeat('${beat.name}', '${beat.file}')">▶️ Écouter</button>
+          <button class="btn-contact" onclick="openModal()">📩 Contact</button>
+        </div>
+      `;
+      beatList.appendChild(card);
+    });
+  }
+
+  function playBeat(name, file) {
+    playerTitle.textContent = "🎵 " + name;
+    audioPlayer.src = file;
+    playerBar.style.display = "flex";
+    audioPlayer.play().catch(() => {
+      console.log("Aucun fichier audio disponible pour l'instant.");
+    });
+  }
+
+  function openModal() {
+    contactModal.style.display = "flex";
+  }
+
+  function closeModal() {
+    contactModal.style.display = "none";
+  }
+
+  searchInput.addEventListener('input', renderBeats);
+  genreFilter.addEventListener('change', renderBeats);
+  sortFilter.addEventListener('change', renderBeats);
+
+  renderBeats();
+</script>
 
 </body>
 </html>
